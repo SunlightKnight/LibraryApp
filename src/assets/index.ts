@@ -1,0 +1,1 @@
+export const icon_back = require("./icon_back.png")

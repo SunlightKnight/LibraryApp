@@ -1,0 +1,11 @@
+{
+  "general": {
+    "ok": "Ok",
+    "confirm": "Conferma",
+    "cancel": "Cancella",
+    "error": "Errore"
+  },
+  "book_list": {
+    "book_list_title": "Lista Libri"
+  }
+}
