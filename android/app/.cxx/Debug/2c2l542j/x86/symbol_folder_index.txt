@@ -1,0 +1,1 @@
+/Users/samueletonelli/Dev/ReactNative/LibraryApp/android/app/build/intermediates/cxx/Debug/2c2l542j/obj/x86
