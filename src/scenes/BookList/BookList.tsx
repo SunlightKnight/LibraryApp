@@ -12,7 +12,7 @@ function BookList(props: BookListProps) {
   const { t } = useTranslation()
 
   useEffect(() => {
-    // props.parentProps.handleLoader()
+    // props.parentProps.handleLoader(true)
   }, [])
 
   return (
