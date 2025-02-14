@@ -1,4 +1,4 @@
-#LibraryApp
+# LibraryApp
 
 This app was created by SunlightKnight, IronTunder, and OssidoFerrico.
 It was developed as a test project for a three-week internship program proposed by our school.
