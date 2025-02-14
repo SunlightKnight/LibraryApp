@@ -1,4 +1,4 @@
-This app was created by SunlightKnight, IronThunder, and OssidoFerrico.
+This app was created by SunlightKnight, IronTunder, and OssidoFerrico.
 It was developed as a test project for a three-week internship program proposed by our school.
 
 When we started creating this app, we only had the project outline provided by our tutor (SunlightKnight). From there, we began working on the app, learning step by step from the React Native Documentation (https://reactnative.dev/docs/getting-started).
