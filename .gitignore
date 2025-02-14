@@ -68,3 +68,4 @@ buck-out/
 
 # android
 android/app/src/main/assets
+android/app/.cxx/Debug
