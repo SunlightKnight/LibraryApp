@@ -3,9 +3,97 @@
     "ok": "Ok",
     "confirm": "Confirm",
     "cancel": "Cancel",
-    "error": "Error"
+    "error": "Error",
+    "loading": "Loading"
+  },
+  "homepage": {
+    "welcome": "Hello",
+    "welcome2": "Welcome to Library App",
+    "recent": "Recently visited books",
+    "connection_error": "Check your connection"
   },
   "book_list": {
-    "book_list_title": "Book List"
+    "title": "Book List",
+    "empty": "No books found",
+    "loading": "Loading...",
+    "searching": "Searching...",
+    "back_to_home": "Homepage"
+  },
+  "search": {
+    "placeholder": "Search for something"
+  },
+  "search_result": {
+    "results": "Results obtained"
+  },
+  "book_description": {
+    "description": "Book Description",
+    "description_empty": "No description available yet",
+    "publish_date": "Publication Date",
+    "publishers": "Publisher(s)",
+    "languages": "Print Languages",
+    "genre": "Genres",
+    "isbn": "ISBN",
+    "rating": "Rating",
+    "rating_empty": "No rating available yet",
+    "pages": "Number of Pages",
+    "edition_count": "Number of Editions",
+    "modals": {
+      "see_more": "See more",
+      "close": "Close"
+    }
+  },
+  "login_page": {
+    "page": "Login",
+    "login": "Login",
+    "close": "Close",
+    "invalid_username": "Invalid username",
+    "already_used_credentials": "Username or email already in use",
+    "invalid_password": "Invalid password",
+    "invalid_name": "Invalid name",
+    "invalid_surname": "Invalid surname",
+    "invalid_email": "Invalid email address",
+    "invalid_credentials": "Incorrect username or password",
+    "register": "Register",
+    "username": "Username",
+    "password": "Password",
+    "registration": {
+      "name": "Name",
+      "surname": "Surname",
+      "email": "Email address",
+      "birth_date": "Date of Birth"
+    }
+  },
+  "book_suggestions": {
+    "other_ones": "You might also like",
+    "liked_books": "Your favorites",
+    "fantasy": "Fantasy",
+    "horror": "Horror",
+    "biographical": "Biographies",
+    "thriller": "Thriller",
+    "adventure": "Adventure",
+    "order_by": "Sort by"
+  },
+  "account": {
+    "your_info": "Your information:",
+    "account_info": "Account information:",
+    "insert_password": "Insert your password to continue",
+    "insert_new_password": "Insert your new password",
+    "error_changing_password": "Error changing password, please try again",
+    "error_password": "Incorrect password. Please try again",
+    "change_password": "Change Password",
+    "next": "Next",
+    "personal_info": "Personal Information",
+    "username": "Username",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email address",
+    "birth_date": "Date of Birth"
+  },
+  "sort_by":{
+    "publish_date" : "Publication Date",
+    "author" : "Author",
+    "title" : "Title",
+    "page_number" : "Number of pages",
+    "rating": "Average rating"
   }
 }

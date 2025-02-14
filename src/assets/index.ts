@@ -1,1 +1,7 @@
 export const icon_back = require("./icon_back.png")
+export const icon_search = require("./icon_search.png")
+export const icon_noimage = require("./icon_noimage.png")
+export const icon_sadcat = require("./icon_sadcat.png")
+export const icon_person = require("./icon_person.png")
+export const icon_heart = require("./heart.png")
+export const icon_red_heart = require("./red_heart.png")

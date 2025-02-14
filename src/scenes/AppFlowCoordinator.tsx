@@ -1,38 +1,47 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import {
-  BackHandler,
-  Image,
-  Platform,
-  View,
-} from 'react-native';
-
-// import { BackendServiceContext } from '../services/BackedServiceProvider';
-import Loader from "../components/Loader"
-import styles, { HEADER_HEIGHT, slideAnimation } from '../styles/styles';
+// Component imports
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { DefaultTheme, NavigationContainer, NavigationState } from '@react-navigation/native';
-import colors from '../styles/colors';
-// import { useTranslation } from 'react-i18next';
-import padding from '../styles/padding';
-import { icon_back } from '../assets';
-import BookList from './BookList/BookList';
+import { NavigationContainer, DefaultTheme, NavigationState } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Loader from "../components/Loader";
+import CustomHeader from '../components/CustomHeader';
+import loadingAnimation from '../assets/animations/loading.json';
+import no_connection from '../assets/animations/no_connection.json';
 
-const Stack = createStackNavigator()
+// Functions, variables, and type imports
+import { useTranslation } from 'react-i18next';
+import { icon_back, icon_search } from '../assets';
+import { BackHandler } from 'react-native';
+
+// Assets and styles imports
+import colors from '../styles/colors';
+import styles, { HEADER_HEIGHT, slideAnimation } from '../styles/styles';
+import padding from '../styles/padding';
+import commonStyles from '../styles/styles';
+
+// Pages imports
+import HomePage from './BookList/Homepage.tsx';
+import BookList from './BookList/BookList';
+import BookDetail from './BookList/BookDetail';
+import BookCategory from './BookList/BookCategory.tsx';
+
+// Create Stack Navigator
+const Stack = createStackNavigator();
+
+// Theme setup for the navigation
 const Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: colors.white
+    background: colors.white,
   },
 };
 
 export default function AppFlowCoordinator() {
-  // State variable that manages the Loader's operation.
-  const [loading, setLoading] = useState(false)
-  // const backendService = useContext(BackendServiceContext)
-  // const { t } = useTranslation()
-  const navRef = useRef<any>()
+  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+  const navRef = useRef<any>();
 
   const screenOptions = {
     title: '',
@@ -40,7 +49,7 @@ export default function AppFlowCoordinator() {
     headerStyle: {
       backgroundColor: colors.primary,
       shadowColor: 'transparent',
-      elevation: 0, // https://github.com/react-navigation/react-navigation/issues/865
+      elevation: 0,
       height: 0,
     },
     headerTintColor: colors.white,
@@ -48,105 +57,195 @@ export default function AppFlowCoordinator() {
     cardStyleInterpolator: slideAnimation,
     gestureEnabled: false,
     headerBackground: () => (
-      <View
-        style={{
-          width: '100%',
-          height: HEADER_HEIGHT,
-          backgroundColor: colors.primary
-        }}
-      />
+      <View style={commonStyles.headerBackground}>
+        <View style={commonStyles.titleContainer}>
+          <Image source={icon_search} style={commonStyles.iconStyle} />
+        </View>
+      </View>
     ),
     headerBackImage: () => (
       <Image
         source={icon_back}
         resizeMode="contain"
         style={{
-          width: 30, 
-          height: 30, 
-          tintColor: colors.white, 
+          width: 30,
+          height: 30,
+          tintColor: colors.white,
           marginHorizontal: padding.half,
-          marginTop: Platform.OS === "ios" ? padding.full : HEADER_HEIGHT-30
-        }} />
+          marginTop: Platform.OS === "ios" ? padding.full : HEADER_HEIGHT - 30,
+        }}
+      />
     ),
-    // headerRight: () => {},
   };
 
-  // useEffect hook: no dependencies between the [] are defined, hence it's called only once.
-  // For more info: https://react.dev/reference/react/useEffect
   useEffect(() => {
-    loadData()
-  }, [])
+    loadData();
+  }, []);
 
-  // Retrieves user's username and saved token.
   const loadData = async () => {
-    console.log("*** AppFlowCoordinator - LOADED")
-  }
+    console.log("*** AppFlowCoordinator - LOADED");
+  };
 
-  // Handles Loader by using "setLoader" function (see line 19).
   const handleLoader = (loading: boolean) => {
-    setLoading(loading)
+    setLoading(loading);
     if (loading) {
       BackHandler.addEventListener('hardwareBackPress', handleAndroidBackButtonPress);
     } else {
       BackHandler.removeEventListener('hardwareBackPress', handleAndroidBackButtonPress);
     }
-  }
+  };
 
-  // Disables Android back button while Loader is active.
   const handleAndroidBackButtonPress = () => {
-    return true
+    return true;
+  };
+
+  const handleSearch = (bookSearchQuery : string) => {
+    setBookSearchQuery(bookSearchQuery);
+    navRef.current?.navigate("BookList", { parentProps : {handleLoader,loading,bookSearchQuery}});
   }
 
-  const navigateToBookDetail = () => {
+  const navigateToBookDetail = (book: any) => {
+    navRef.current?.navigate("BookDetail", { book });
+  };
 
+  const [bookSearchQuery, setBookSearchQuery] = useState("");
+  const [connectionError, setError] = useState<boolean | null>(null);
+  const [currentCategory,setCurrentCategory] = useState<string>()
+
+  const handleErrorLoader = (isVisible: boolean) => {
+    setError(isVisible);
   }
 
-  const pages: {[key: string]: any} = {
+  const pages: { [key: string]: any } = {
+    Homepage: {
+      component: HomePage,
+      parentProps: {
+        handleLoader,
+        setBookSearchQuery,
+        handleErrorLoader: (isVisible: boolean) => setError(isVisible),
+        setCurrentCategory,
+        connectionError,
+        loading
+      },
+      header: {
+        title: 'Homepage',
+        customHeader: () => (
+          <CustomHeader onSearch={(bookSearchQuery) => handleSearch(bookSearchQuery)} />
+        ),
+        headerBackImage: () => null,
+      },
+    },
     BookList: {
       component: BookList,
+      parentProps: {
+        handleLoader,
+        loading,
+        bookSearchQuery,
+      },
+      nav: {
+        "BookDetail": navigateToBookDetail,
+        "BookCategory": (category: string, books: any[]) =>
+          navRef.current?.navigate("BookCategory", { category, books }),
+      },
+      header: {
+        title: 'BookList',
+        customHeader: () => (
+          <CustomHeader onSearch={(query) => handleSearch(query)} />
+        ),
+        headerBackImage: () => (
+          <></>
+        ),
+      },
+    },
+    BookItemSuggestion: {
+      nav: {
+        "BookDetail": navigateToBookDetail,
+      },
+    },
+    BookDetail: {
+      component: BookDetail,
       parentProps: { handleLoader },
-      nav: { 
-        "bookDetail": navigateToBookDetail, 
-      }
+      header: {
+        title: 'Book Detail',
+        customHeader: () => (
+          <View style={commonStyles.headerBackground} />
+        ),
+        headerBackImage: () => (
+          <Image
+            source={icon_back}
+            resizeMode="contain"
+            style={{
+              width: 30,
+              height: 30,
+              tintColor: colors.white,
+              marginHorizontal: padding.half,
+              marginTop: Platform.OS === "ios" ? padding.full : HEADER_HEIGHT - 50,
+            }}
+          />
+        ),
+      },
+    },
+    BookCategory: {
+      component: BookCategory,
+      parentProps: { handleLoader },
+      header: {
+        title: 'Book Category',
+        customHeader: () => (
+          <CustomHeader title={currentCategory}/>
+        ),
+        headerBackImage: () => (
+          <Image
+            source={icon_back}
+            resizeMode="contain"
+            style={{
+              width: 30,
+              height: 30,
+              tintColor: colors.white,
+              marginHorizontal: padding.half,
+              marginTop: Platform.OS === "ios" ? padding.full : HEADER_HEIGHT - 50,
+            }}
+          />
+        ),
+      },
     },
   };
 
   return (
-    <View style={{width: "100%", height: "100%"}}>
+    <View style={{ width: "100%", height: "100%" }}>
       <NavigationContainer
         ref={navRef}
         theme={Theme}
         onStateChange={(navigationState: NavigationState | undefined) => {
-          console.log(`*** AppFlowCoordinator:onStateChange: navigationState=${JSON.stringify(navigationState)}`)
+          console.log(`*** AppFlowCoordinator:onStateChange: navigationState=${JSON.stringify(navigationState)}`);
         }}>
-        
-        <Stack.Navigator
-          initialRouteName={'BookList'}
-          screenOptions={screenOptions}>
-            {Object.keys(pages).map((key: string) => {
-              const page = pages[key];
-              const PageComponent = page.component;
-              return (
-                <Stack.Screen
-                  key={key}
-                  name={key}>
-                  {(props) => {
-                    return (
-                      <SafeAreaProvider style={{paddingTop: HEADER_HEIGHT}}>
-                        <PageComponent
-                          {...props}
-                          parentProps={page.parentProps}
-                          nav={page.nav ? page.nav : undefined}
-                        />
-                      </SafeAreaProvider>
-                    );
-                  }}
-                </Stack.Screen>
-              );
+        <Stack.Navigator initialRouteName="Homepage" screenOptions={screenOptions}>
+          {Object.keys(pages).map((key: string) => {
+            const page = pages[key];
+            const PageComponent = page.component;
+            return (
+              <Stack.Screen
+                key={key}
+                name={key}
+                options={{
+                  title: page.header?.title || key,
+                  headerBackground: page.header?.customHeader,
+                  headerBackImage: page.header?.headerBackImage,
+                }}>
+                {(props) => (
+                  <SafeAreaProvider style={{ paddingTop: HEADER_HEIGHT }}>
+                    <PageComponent
+                      {...props}
+                      parentProps={page.parentProps}
+                      nav={page.nav ? page.nav : undefined}
+                    />
+                  </SafeAreaProvider>
+                )}
+              </Stack.Screen>
+            );
           })}
         </Stack.Navigator>
       </NavigationContainer>
-      <Loader loading={loading} />
+      {!connectionError ? (<Loader loading={loading} animation={loadingAnimation} message='general.loading'/>) : (<Loader loading={connectionError} animation={no_connection} message='homepage.connection_error'/>)}
     </View>
-  )
+  );
 }

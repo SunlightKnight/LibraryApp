@@ -3,9 +3,97 @@
     "ok": "Ok",
     "confirm": "Conferma",
     "cancel": "Cancella",
-    "error": "Errore"
+    "error": "Errore",
+    "loading": "Caricamento"
+  },
+  "homepage": {
+    "welcome": "Ciao",
+    "welcome2": "Benvenuto su Library App",
+    "recent": "Libri visitati di recente",
+    "connection_error": "Controlla la tua connessione"
   },
   "book_list": {
-    "book_list_title": "Lista Libri"
+    "title": "Lista Libri",
+    "empty": "Nessun libro trovato",
+    "loading": "Caricamento...",
+    "searching": "Sto cercando...",
+    "back_to_home": "Homepage"
+  },
+  "search": {
+    "placeholder": "Ricerca qualcosa"
+  },
+  "search_result": {
+    "results": "Risultati ottenuti"
+  },
+  "book_description": {
+    "description": "Descrizione del Libro",
+    "description_empty": "Nessuna descrizione ancora disponibile",
+    "publish_date": "Data di pubblicazione",
+    "publishers": "Casa(e) editrice(i)",
+    "languages": "Lingue di stampa",
+    "genre": "Generi",
+    "isbn": "ISBN",
+    "rating": "Valutazione",
+    "rating_empty": "Nessuna valutazione ancora disponibile",
+    "pages": "Numero di pagine",
+    "edition_count": "Numero di edizioni",
+    "modals": {
+      "see_more": "Vedi tutto",
+      "close": "Chiudi"
+    }
+  },
+  "login_page": {
+    "page": "Accedi",
+    "login": "Accedi",
+    "close": "Chiudi",
+    "invalid_username": "Nome utente non valido",
+    "already_used_credentials": "Nome utente o email già in uso",
+    "invalid_password": "Password non valida",
+    "invalid_name": "Nome non valido",
+    "invalid_surname": "Cognome non valido",
+    "invalid_email": "Indirizzo email non valido",
+    "invalid_credentials": "Username o password errati",
+    "register": "Registrati",
+    "username": "Nome utente",
+    "password": "Password",
+    "registration": {
+      "name": "Nome",
+      "surname": "Cognome",
+      "email": "Indirizzo email",
+      "birth_date": "Data di nascita"
+    }
+  },
+  "book_suggestions": {
+    "other_ones": "Ti potrebbe piacere anche",
+    "liked_books":"I tuoi preferiti",
+    "fantasy": "Fantasy",
+    "horror": "Horror",
+    "biographical": "Biografie",
+    "thriller": "Thriller",
+    "adventure": "Avventura",
+    "order_by" : "Ordina per"
+  },
+  "account": {
+    "your_info": "Le tue informazioni:",
+    "account_info": "Informazioni sull'account:",
+    "insert_password" : "Inserisci la tua password per continuare",
+    "insert_new_password" : "Inserisci la tua nuova password",
+    "error_changing_password" : "Errore durante il cambiamento della password, riprova",
+    "error_password": "Password errata. Riprova",
+    "change_password": "Cambia Password",
+    "next" : "Avanti",
+    "personal_info": "Informazioni personali",
+    "username": "Nome utente",
+    "name": "Nome",
+    "surname": "Cognome",
+    "email": "Indirizzo email",
+    "birth_date": "Data di nascita"
+  },
+  "sort_by":{
+    "publish_date" : "Data di pubblicazione",
+    "author" : "Autore",
+    "title" : "Titolo",
+    "page_number" : "Numero di pagine",
+    "rating": "Valutazione"
   }
 }

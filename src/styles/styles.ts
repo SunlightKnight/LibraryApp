@@ -7,7 +7,7 @@ import fontSize from './fontSize';
 
 // Variable used to determine header height, that changes between platforms and device models.
 export const HEADER_HEIGHT = (Platform.OS === "ios" && DeviceInfo.hasDynamicIsland()) ? 100 : 
-                              (Platform.OS === "ios" && DeviceInfo.hasNotch()) ? 90 : Platform.OS === "android" ? 90 : 70;
+                              (Platform.OS === "ios" && DeviceInfo.hasNotch()) ? 90 : Platform.OS === "android" ? 150 : 100;
 
 // Animation used for stack navigation. For more info, check:
 // https://reactnative.dev/docs/animated
@@ -69,12 +69,7 @@ const commonStyles = StyleSheet.create({
   scrollingContainer: {
     width: '100%',
     height: '100%',
-  },
-  scrollingContent: {
-    width: '100%',
-    backgroundColor: 'transparent',
-    paddingVertical: padding.half,
-    paddingHorizontal: padding.full,
+    padding: padding.full,
   },
   container: {
     width: '100%',
@@ -87,15 +82,37 @@ const commonStyles = StyleSheet.create({
     color: colors.black,
     fontSize: fontSize.normal
   },
+  textTitleText: {
+    color: colors.black,
+    fontSize: fontSize.big,
+    fontWeight: 'bold',
+  },
+  bookPrincipalDetailsContainer: {
+    flex : 1,
+    flexDirection: 'column',
+    backgroundColor : colors.primary
+  },
+  bookDetailContainer: {
+    flex : 1,
+    flexDirection: 'column'
+  },
+  bookDescriptionContainer: {
+    flex : 1,
+    backgroundColor : colors.white,
+    flexDirection: 'column',
+  },
+  textBookTitleText: {
+    color: colors.black,
+    fontSize: fontSize.normal,
+    fontWeight: 'bold',
+  },
   roundedTopCorners: {
     borderTopLeftRadius: Dimensions.get('window').width / 9,
     borderTopRightRadius: Dimensions.get('window').width / 3,
-    overflow: 'hidden',
   },
   roundedBottomsCorners: {
     borderBottomLeftRadius: Dimensions.get('window').width / 12,
     borderBottomRightRadius: Dimensions.get('window').width / 4,
-    overflow: 'hidden',
   },
   shadow: {
     shadowColor: colors.black,
@@ -105,18 +122,48 @@ const commonStyles = StyleSheet.create({
     elevation: 5
   },
   titleContainer: {
-    flexDirection: "row", 
-    justifyContent: "space-between", 
-    marginHorizontal: padding.half, 
-    marginVertical: padding.half
+    width: '94%',
+    padding: padding.full,
+    position: 'absolute',
+    bottom: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  defaultFont: {
+    fontFamily : 'Roboto',
+    fontSize: fontSize.normal,
+    color: colors.black,
+  },
+  searchInput: {
+    width: '80%',
+    height: 40,
+    borderColor: colors.black,
+    borderWidth: 1,
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+  iconStyle: {
+    width: 25,
+    height: 25,
+    tintColor: colors.black,
   },
   roundedViewContainer: {
-    flex: 1, 
-    backgroundColor: colors.white, 
-    marginTop: padding.full, 
-    paddingBottom: padding.full, 
-    borderRadius: 5
-  }
+    flexDirection: 'row', 
+    backgroundColor: colors.red,
+    margin: padding.quarter, 
+    padding: padding.full,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  headerBackground: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    height: HEADER_HEIGHT,
+    backgroundColor: colors.primary,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,  
+  },
 });
 
 export default commonStyles;
