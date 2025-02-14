@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   modalContent: {
     width: '80%',
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: colors.bookContainerBackground,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
   informationBox: {
     margin: 10,
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
