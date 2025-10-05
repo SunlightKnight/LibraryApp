@@ -15,9 +15,9 @@ const FETCH_TIMEOUT = 60;
 
 // APIs TEST endpoint, defined in "config.ts" file.
 const API_BASE_URL: string = AppConfig.API_ENDPOINT;
-const JSONBIN_API_KEY = "$2a$10$AAesUqIfMrjJUHxJuMX0IOQAwsnmQx.3FwQwJBNKtDLYvwEy0g6Hi";
+const JSONBIN_API_KEY = "";
 const JSONBIN_BASE_URL = "https://api.jsonbin.io/v3";
-const JSONBIN_COLLECTION_ID = "67ac5412acd3cb34a8decda8";
+const JSONBIN_COLLECTION_ID = "";
 let lastUserId = 0;
 
 export interface IJSON {
@@ -157,7 +157,7 @@ const BackendServiceProvider = ({ children } : any) => {
     try {
       var headers: { [key: string]: string } = {
         'Content-Type': 'application/json',
-        'User-Agent' : 'LibraryApp/1.0 (samuele.tonelli@pmpayment.com)',
+        'User-Agent' : 'LibraryApp/1.0 ("youremail@email.com")',
         'Accept': responseContentType,
       };
 
